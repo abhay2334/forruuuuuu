@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Birthday Surprise</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        #locked { font-size: 30px; }
+
+        #unlocked {
+            display: none;
+            font-size: 40px;
+            animation: fade 2s ease-in-out;
+        }
+
+        #candles {
+            margin-top: 20px;
+            font-size: 50px;
+            cursor: pointer;
+            display: none;
+        }
+
+        #cutCakeBtn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 22px;
+            background: pink;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            display: none;
+            cursor: pointer;
+        }
+
+        #cakeMsg {
+            font-size: 35px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="locked">⏳ wait till 12:00 AM...</div>
+
+    <div id="unlocked">
+        🎉 HAPPY BIRTHDAY 🎉  
+        <div id="candles">🕯️🕯️🕯️ tap to blow</div>
+    </div>
+
+    <button id="cutCakeBtn">🍰 CUT CAKE 🍰</button>
+
+    <div id="cakeMsg">🎂 Cake cut! Happy Birthday 🎉</div>
+
+<script>
+    function checkTime() {
+        let now = new Date();
+        let hour = now.getHours();
+        let min = now.getMinutes();
+
+        // Unlock at 12:00 AM
+        if (hour === 0 && min === 0) {
+            document.getElementById("locked").style.display = "none";
+            document.getElementById("unlocked").style.display = "block";
+            document.getElementById("candles").style.display = "block";
+        }
+    }
+    setInterval(checkTime, 1000);
+
+    // Blow candles
+    document.getElementById("candles").onclick = function() {
+        this.innerHTML = "✨✨ candles blown! ✨✨";
+        setTimeout(() => {
+            document.getElementById("cutCakeBtn").style.display = "block";
+        }, 1000);
+    };
+
+    // Cut cake button
+    document.getElementById("cutCakeBtn").onclick = function() {
+        document.getElementById("cakeMsg").style.display = "block";
+        this.style.display = "none";
+    };
+</script>
+
+</body>
+</html>
